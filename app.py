@@ -17,6 +17,10 @@ if st.checkbox('Show Table'):
     st.table(data)
 
 graph = st.selectbox('What kind of graph?', ['Non-interactive', 'Interactive'])
+# Create slider for both graphs
+val = st.slider('Filter data using years', 0, 20)
+# Connect slider to real data
+data = data.loc[data['YearsExperience'] >= val]
 
 if graph == 'Non-interactive':
     plt.figure(figsize=(10, 5))
