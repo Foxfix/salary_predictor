@@ -28,7 +28,13 @@ if graph == 'Non-interactive':
     st.pyplot()
 
 if graph == 'Interactive':
+    layout = go.Layout(
+        xaxis=dict(range=[0, 15]),
+        yaxis=dict(range=[0, 400000])
+    )
 
+    fig = go.Figure(data=go.Scatter(x=data['YearsExperience'], y=data['Salary'], mode='markers'), layout=layout)
+    st.plotly_chart(fig)
 
 if nav == 'Prediction':
     st.write('Pred')
