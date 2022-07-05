@@ -19,10 +19,16 @@ if st.checkbox('Show Table'):
 graph = st.selectbox('What kind of graph?', ['Non-interactive', 'Interactive'])
 
 if graph == 'Non-interactive':
-    pass
+    plt.figure(figsize=(10, 5))
+    plt.scatter(data['YearsExperience'], data['Salary'])
+    plt.ylim(0)
+    plt.xlabel('Years of Experience')
+    plt.ylabel('Salary')
+    plt.tight_layout()
+    st.pyplot()
 
 if graph == 'Interactive':
-    pass
+
 
 if nav == 'Prediction':
     st.write('Pred')
