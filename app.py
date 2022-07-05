@@ -2,9 +2,14 @@ import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
 from plotly import graph_objs as go
+from sklearn.linear_model import LinearRegression
+import numpy as np
 
 
 data = pd.read_csv('Data/Salary_Data.csv')
+x = np.array(data['YearsExperience']).reshape(-1, 1)
+lr = LinearRegression()
+lr.fit(x, np.array(data['Salary']))
 
 st.title('Salary Predictor App')
 
@@ -41,7 +46,12 @@ if graph == 'Interactive':
     st.plotly_chart(fig)
 
 if nav == 'Prediction':
-    st.write('Pred')
+    st.header('Knowing your salary')
+    val = st.number_input('Enter your experience', 0.00, 20.00, step=0.25)
+    val = np.array(val).reshape(1, -1)
+    pred = lr.predict(val)[0]
+    if st.button('Predict'):
+        st.success(f'Your predicted salary is {round(pred)}')
 
 if nav == 'Contribute':
     st.write('Contri')
